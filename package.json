@@ -8,6 +8,7 @@
   "dependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.6",
     "@stablelib/random": "^1.0.2",
+    "@tableland/sdk": "^3.1.2",
     "axios": "^0.27.2",
     "bcrypt": "^5.0.1",
     "ceramic-cacao": "^1.4.0",

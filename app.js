@@ -1,3 +1,7 @@
+'use strict'
+
+global.fetch = require('node-fetch')
+
 var createError = require("http-errors");
 var express = require("express");
 var path = require("path");
@@ -7,6 +11,8 @@ var dotenv = require("dotenv");
 var cors = require("cors");
 dotenv.config();
 const fileUpload = require("express-fileupload");
+const ethers = require("ethers");
+const tbl = require("@tableland/sdk");
 
 var indexRouter = require("./routes/index");
 
@@ -61,23 +67,45 @@ const corsOpts2 = {
   allowedHeaders: ["Content-Type", "validate"],
 };
 
-//model config
-
-var models = require("./models");
-models.sequelize
-  .sync()
-  .then(function () {
-    console.log("Connected");
-  })
-  .catch(function (err) {
-    console.log("Oops" + err);
-  });
-
 app.use("/", cors(corsOpts2), indexRouter);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
 });
+
+const privateKey = process.env.TABLE_WALLET;
+const wallet = new ethers.Wallet(privateKey);
+const provider = new ethers.providers.AlchemyProvider("maticmum", process.env.TABLE_ALCHEMY);
+const signer = wallet.connect(provider);
+
+async function connectTable(){
+  global.tableland = await tbl.connect({ signer, network: "testnet", chain: "polygon-mumbai" });
+}
+
+connectTable();
+
+// async function checkModel(){
+
+//   const tableland = await tbl.connect({ signer, network: "testnet", chain: "polygon-mumbai" });
+  // const tables = await tableland.list();
+  // console.log(tables)
+  // try {
+  //   const createNfcCollection = await tableland.create(
+  //     `id integer not null, nfcId text, maxEditions integer,nftTypeId text,title text,wallet text, primary key (id)`, // Table schema definition
+  //     {
+  //       prefix: `NfcCollection` // Optional `prefix` used to define a human-readable string
+  //     }
+  //   );
+
+  //   console.log(createNfcCollection);
+  // } catch (error) {
+  //   console.log(error);
+  // }
+
+
+// }
+
+// checkModel();
 
 // error handler
 app.use(function (err, req, res, next) {
