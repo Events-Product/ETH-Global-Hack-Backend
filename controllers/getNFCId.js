@@ -6,7 +6,7 @@ module.exports = async function(req,res)
 
     try {
         
-        const output = await tableland.read(`SELECT * FROM NfcCollection_80001_2445 where nfcId = "${id}"`);
+        const output = await tableland.read(`SELECT * FROM ${process.env.MODEL_1} where nfcId = "${id}"`);
 
         if(output.rows.length)
         {

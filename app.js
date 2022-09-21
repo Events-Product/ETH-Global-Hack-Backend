@@ -85,22 +85,34 @@ async function connectTable(){
 connectTable();
 
 // async function checkModel(){
-
-//   const tableland = await tbl.connect({ signer, network: "testnet", chain: "polygon-mumbai" });
-  // const tables = await tableland.list();
-  // console.log(tables)
-  // try {
-  //   const createNfcCollection = await tableland.create(
-  //     `id integer not null, nfcId text, maxEditions integer,nftTypeId text,title text,wallet text, primary key (id)`, // Table schema definition
-  //     {
-  //       prefix: `NfcCollection` // Optional `prefix` used to define a human-readable string
-  //     }
-  //   );
-
-  //   console.log(createNfcCollection);
-  // } catch (error) {
-  //   console.log(error);
-  // }
+//   tableland = await tbl.connect({ signer, network: "testnet", chain: "polygon-mumbai" });
+//   const tables = await tableland.list();
+//   console.log(tables)
+//   try {
+//     const createNfcCollection = await tableland.create(
+//       `id integer not null, nfcId text, maxEditions integer,nftTypeId text,title text,wallet text, primary key (id)`, // Table schema definition
+//       {
+//         prefix: `NfcCollection` // Optional `prefix` used to define a human-readable string
+//       }
+//     );
+//     console.log(createNfcCollection);
+//     const createNfcCollection = await tableland.create(
+//       `id integer not null, address text, count integer,creations integer,tagged integer, primary key (id)`, // Table schema definition
+//       {
+//         prefix: `EthMoment` // Optional `prefix` used to define a human-readable string
+//       }
+//     );
+//     console.log(createNfcCollection);
+//       const createNfcCollection = await tableland.create(
+//       `id integer not null, creator text, addresses text, primary key (id)`, // Table schema definition
+//       {
+//         prefix: `user` // Optional `prefix` used to define a human-readable string
+//       }
+//     );
+//     console.log(createNfcCollection);
+//   } catch (error) {
+//     console.log(error);
+//   }
 
 
 // }
