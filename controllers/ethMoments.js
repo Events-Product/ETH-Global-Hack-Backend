@@ -1,4 +1,4 @@
-
+var friendList = require("../models").friendList;
 module.exports = async function(req,res)
 {
 
@@ -71,6 +71,7 @@ module.exports = async function(req,res)
             addresses.splice(indexOfCreator, 1);
         }
 
+
         var checkUser = await tableland.read(`SELECT * FROM ${process.env.MODEL_3} where creator = "${creatorAddress}"`);
 
         if(checkUser.rows.length)
@@ -91,6 +92,41 @@ module.exports = async function(req,res)
 
         };
 
+       
+
+        for(i=0; i<addresses.length; i++)
+        {
+            
+            var temp = [...addresses];
+            var indexOfTempAdd = temp.indexOf(addresses[i]);
+
+            if (indexOfTempAdd > -1) {
+                temp.splice(indexOfTempAdd, 1);
+            }
+
+           
+
+            temp[temp.length] = creatorAddress;
+
+           
+
+            var check = await friendList.findAll({where:{wallet: addresses[i]}});
+
+            if(check.length)
+            {
+                var existFriends = check[0].friends;
+                var finalFriends = existFriends.concat(temp.filter((item) => existFriends.indexOf(item) < 0));
+
+                var update = await friendList.update({friends:finalFriends},{where:{wallet:addresses[i]}})
+            }else{
+                var upload = await friendList.create({wallet:addresses[i],friends:temp});
+            }
+
+           
+
+
+        }
+
         res.send({message: "Success"});
         return;
 
@@ -100,41 +136,5 @@ module.exports = async function(req,res)
     }
 
     
-
-}
-
-function matchEntriesETHMoment(data,add)
-{
-    
-
-    finalDat.add = add
-
-    return finalDat;
-
-}
-
-function matchEntriesUser(data)
-{
-    let {columns, rows} = data;
-
-    var row = rows[0]
-
-    var finalDat = {}
-
-    for(i=0; i<columns.length; i++)
-    {
-
-        if(columns[i].name == "addresses")
-        {
-
-            finalDat[columns[i].name] = JSON.parse(row[i])
-        }else{
-
-        finalDat[columns[i].name] = row[i];
-        }
-
-    }
-
-    return finalDat;
 
 }

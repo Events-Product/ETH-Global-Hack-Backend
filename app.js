@@ -73,6 +73,18 @@ app.use(function (req, res, next) {
   next(createError(404));
 });
 
+
+//model config
+
+var models = require("./models");
+models.sequelize.sync().then(function() {
+  console.log("Connected");
+}).catch(function(err){
+  console.log("Oops"+err);
+})
+
+//tableland
+
 const privateKey = process.env.TABLE_WALLET;
 const wallet = new ethers.Wallet(privateKey);
 const provider = new ethers.providers.AlchemyProvider("maticmum", process.env.TABLE_ALCHEMY);

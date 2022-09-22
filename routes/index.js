@@ -21,6 +21,7 @@ router.post("/ethMoments", auth, require("../controllers/ethMoments.js"));
 
 router.get("/getAddress/:address", auth, require("../controllers/getAddress"))
 router.get("/getCreated/:address", auth, require("../controllers/getCreated"))
+router.get("/getFriends/:address", auth, require("../controllers/getFriends"))
 
 // router.get(
 //   "/ethMomentsLeaderboard",
