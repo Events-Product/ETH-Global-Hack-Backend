@@ -30,6 +30,9 @@ router.get("/hunt/:eventId/:ticketId", auth, require("../controllers/getHunt"));
 router.post("/hunt/:eventId/:ticketId", auth, require("../controllers/postHunt"));
 router.patch("/hunt/:eventId/:ticketId", auth, require("../controllers/updateHunt"));
 
+router.get("/leaderboardCount", auth, require("../controllers/getLeaderBoardCount"));
+router.get("/leaderboardCreation", auth, require("../controllers/getLeaderBoardCreation"));
+router.get("/leaderboardTagged", auth, require("../controllers/getLeaderBoardTagged"));
 
 // router.get(
 //   "/ethMomentsLeaderboard",
