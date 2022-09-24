@@ -25,6 +25,12 @@ router.get("/getAddress/:address", auth, require("../controllers/getAddress"));
 router.get("/getCreated/:address", auth, require("../controllers/getCreated"));
 router.get("/getFriends/:address", auth, require("../controllers/getFriends"));
 
+router.get("/getEvent/:id", auth, require("../controllers/getEventScavanger"));
+router.get("/hunt/:eventId/:ticketId", auth, require("../controllers/getHunt"));
+router.post("/hunt/:eventId/:ticketId", auth, require("../controllers/postHunt"));
+router.patch("/hunt/:eventId/:ticketId", auth, require("../controllers/updateHunt"));
+
+
 // router.get(
 //   "/ethMomentsLeaderboard",
 //   auth,
